@@ -318,6 +318,7 @@ func (c *Ctx) ImportForAbs(path string) (string, error) {
 	}
 	if isPrefix {
 		if len(path) <= len(srcprefix) {
+			return filepath.ToSlash(path[len(srcprefix)-1:]), nil
 			return "", errors.New("dep does not currently support using GOPATH/src as the project root")
 		}
 
