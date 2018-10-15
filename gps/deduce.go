@@ -705,30 +705,49 @@ func (dc *deductionCoordinator) deduceKnownPaths(path string) (pathDeduction, er
 
 func (dc *deductionCoordinator) deduceMirrorPaths(path string, uri *url.URL) (pd pathDeduction, ok bool) {
 	schemes := []string{"https", "http"}
-	mirrors := map[string]string {
+	mirrors := map[string]string{
 		// golang.org/x
-		"golang.org/x/blog": "github.com/golang/blog",
+		"golang.org/x/blog":   "github.com/golang/blog",
 		"golang.org/x/crypto": "github.com/golang/crypto",
-		"golang.org/x/exp": "github.com/golang/exp",
-		"golang.org/x/image": "github.com/golang/image",
+		"golang.org/x/exp":    "github.com/golang/exp",
+		"golang.org/x/image":  "github.com/golang/image",
 		"golang.org/x/mobile": "github.com/golang/mobile",
-		"golang.org/x/net": "github.com/golang/net",
-		"golang.org/x/sys": "github.com/golang/sys",
-		"golang.org/x/talks": "github.com/golang/talks",
-		"golang.org/x/text": "github.com/golang/text",
-		"golang.org/x/tools": "github.com/golang/tools",
-		"golang.org/x/sync": "github.com/golang/sync",
-		"golang.org/x/time": "github.com/golang/time",
+		"golang.org/x/net":    "github.com/golang/net",
+		"golang.org/x/sys":    "github.com/golang/sys",
+		"golang.org/x/talks":  "github.com/golang/talks",
+		"golang.org/x/text":   "github.com/golang/text",
+		"golang.org/x/tools":  "github.com/golang/tools",
+		"golang.org/x/sync":   "github.com/golang/sync",
+		"golang.org/x/time":   "github.com/golang/time",
 		"golang.org/x/oauth2": "github.com/golang/oauth2",
 
 		// google.golang.org
-		"google.golang.org/grpc": "github.com/grpc/grpc-go",
-		"google.golang.org/genproto": "github.com/google/go-genproto",
-		"google.golang.org/appengine": "github.com/golang/appengine",
+		"google.golang.org/grpc":               "github.com/grpc/grpc-go",
+		"google.golang.org/genproto":           "github.com/google/go-genproto",
+		"google.golang.org/appengine":          "github.com/golang/appengine",
 		"google.golang.org/appengine/cloudsql": "github.com/golang/appengine",
-		"google.golang.org/api/option": "github.com/google/google-api-go-client/option",
-		"google.golang.org/api/iterator": "github.com/google/google-api-go-client/iterator",
-		"cloud.google.com/go": "github.com/GoogleCloudPlatform/google-cloud-go",
+		"google.golang.org/api/option":         "github.com/google/google-api-go-client/option",
+		"google.golang.org/api/iterator":       "github.com/google/google-api-go-client/iterator",
+		"cloud.google.com/go":                  "github.com/GoogleCloudPlatform/google-cloud-go",
+
+		// go.uber.org
+		"go.uber.org/atomic":       "github.com/uber-go/atomic",
+		"go.uber.org/automaxprocs": "github.com/uber-go/automaxprocs",
+		"go.uber.org/cadence":      "github.com/uber-go/cadence-client",
+		"go.uber.org/config":       "github.com/uber-go/config",
+		"go.uber.org/dig":          "github.com/uber-go/dig",
+		"go.uber.org/fx":           "github.com/uber-go/fx",
+		"go.uber.org/goleak":       "github.com/uber-go/goleak",
+		"go.uber.org/multierr":     "github.com/uber-go/multierr",
+		"go.uber.org/net/metrics":  "github.com/yarpc/metrics",
+		"go.uber.org/protoidl":     "github.com/uber-go/protoidl",
+		"go.uber.org/ratelimit":    "github.com/uber-go/ratelimit",
+		"go.uber.org/sally":        "github.com/uber-go/sally",
+		"go.uber.org/thriftrw":     "github.com/thriftrw/thriftrw-go",
+		"go.uber.org/tools":        "github.com/uber-go/tools",
+		"go.uber.org/torch":        "github.com/uber/go-torch",
+		"go.uber.org/yarpc":        "github.com/yarpc/yarpc-go",
+		"go.uber.org/zap":          "github.com/uber-go/zap",
 	}
 
 	for root, source := range mirrors {
